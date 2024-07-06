@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Posts</title>
+  <%= stylesheet_link_tag 'styles' %> <!-- This line includes the styles.css -->
+</head>
+<body>
+  <div class="container">
+    <h1>Posts</h1>
+    
+    <% @posts.each_with_index do |post, index| %>
+      <div class="post">
+        <h2><%= link_to post.title, post %></h2>
+        <p><%= post.content.truncate(100) %></p>
+        <% if post.published_date %>
+          <p><%= post.published_date.strftime("%B %d, %Y") %></p>
+        <% else %>
+          <p>Published date not available</p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="new-post-link">
+      <%= link_to 'New Post', new_post_path, class: 'button' %>
+    </div>
+  </div>
+</body>
+</html>
